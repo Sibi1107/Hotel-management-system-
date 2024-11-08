@@ -1,0 +1,36 @@
+class HotelManagementSystem:
+    def __init__(self):
+        self.customers = []
+        self.room_rates = {
+            'Single': 100,
+            'Double': 150,
+            'Suite': 250
+        }
+
+    def add_customer(self):
+        customer = {}
+        customer['id'] = input("Enter Customer ID: ")
+        customer['name'] = input("Enter Customer Name: ")
+        print("Room Types: Single, Double, Suite")
+        customer['room_type'] = input("Enter Room Type: ")
+        while customer['room_type'] not in self.room_rates:
+            print("Invalid room type. Please choose from Single, Double, Suite.")
+            customer['room_type'] = input("Enter Room Type: ")
+        customer['days'] = int(input("Enter Number of Days of Stay: "))
+        customer['bill'] = self.calculate_bill(customer['room_type'], customer['days'])
+        self.customers.append(customer)
+        print("Customer added successfully!\n")
+
+    def calculate_bill(self, room_type, days):
+        return self.room_rates[room_type] * days
+
+    def display_customers(self):
+        if not self.customers:
+            print("No customers to display.\n")
+            return
+        print("\n--- Customer Details ---")
+        for customer in self.customers:
+            print(f"Customer ID: {customer['id']}")
+            print(f"Customer Name: {customer['name']}")
+            print(f"Room Type: {customer['room_type']}")
+            print(f"Number of Days: {customer['days
